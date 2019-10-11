@@ -30,10 +30,18 @@ public class GPSComputer {
 	public double totalDistance() {
 
 		double distance = 0;
+		for(int i=0; i<gpspoints.length-1; i++) {
+			distance += GPSUtils.distance(gpspoints[i], gpspoints[i+1]);
+			
+			
+			
+			
+		} return distance;
+		
 
 		// TODO - START
 
-		throw new UnsupportedOperationException(TODO.method());
+		//throw new UnsupportedOperationException(TODO.method());
 
 		// TODO - SLUTT
 
@@ -43,10 +51,27 @@ public class GPSComputer {
 	public double totalElevation() {
 
 		double elevation = 0;
+		for(int i = 0; i<gpspoints.length-1; i++) {
+			if(gpspoints[i+1].getElevation()-gpspoints[i].getElevation() >=0) {
+				elevation = elevation + (gpspoints[i+1].getElevation()-gpspoints[i].getElevation());
+			}
+			
+			
+			
+			
+		
+		} return elevation;
+			
+			
+		
+		}
+		
+		
+		
 
 		// TODO - START
 
-		throw new UnsupportedOperationException(TODO.method());
+		//throw new UnsupportedOperationException(TODO.method());
 
 		// TODO - SLUTT
 
@@ -54,8 +79,10 @@ public class GPSComputer {
 
 	// beregn total tiden for hele turen (i sekunder)
 	public int totalTime() {
+		
+		
 
-		throw new UnsupportedOperationException(TODO.method());
+		//throw new UnsupportedOperationException(TODO.method());
 
 	}
 		
@@ -65,7 +92,7 @@ public class GPSComputer {
 		
 		// TODO - START		// OPPGAVE - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+		//throw new UnsupportedOperationException(TODO.method());
 
 		// TODO - SLUTT
 

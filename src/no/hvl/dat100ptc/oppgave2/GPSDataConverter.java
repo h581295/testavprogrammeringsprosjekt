@@ -14,13 +14,38 @@ public class GPSDataConverter {
 
 	public static int toSeconds(String timestr) {
 		
+		
+		//int secs;
+		//String[] time = timestr.split("T");
+		//String time1 = time[1];
+		//String [] time2 = time1.split(".0");
+		//String[] timefinal = time2[0].split(":");
+		//int hr = Integer.parseInt(timefinal[0]);
+		//int min = Integer.parseInt(timefinal[1]);
+		//int sec = Integer.parseInt(timefinal[2]);
+		//secs = (hr * 60*60) + (min*60)+(sec);
+		//return secs;
+		
 		int secs;
 		int hr, min, sec;
+		
+		timestr = timestr.substring(11, 19);
+		
+		String[] timeArray = timestr.split(":");
+		
+		hr = Integer.parseInt(timeArray[0])*3600;
+		min = Integer.parseInt(timeArray[1])*60;
+		sec = Integer.parseInt(timeArray[2]);
+		secs = hr + min + sec;
+		
+		return secs;
+
+
 		
 		// TODO
 		// OPPGAVE - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+		//throw new UnsupportedOperationException(TODO.method());
 
 		// OPPGAVE - SLUTT
 		
@@ -28,11 +53,24 @@ public class GPSDataConverter {
 
 	public static GPSPoint convert(String timeStr, String latitudeStr, String longitudeStr, String elevationStr) {
 
-		GPSPoint gpspoint;
+        double latitude, longitude, elevation;
+        latitude = Double.parseDouble(latitudeStr);
+        longitude = Double.parseDouble(longitudeStr);
+        elevation = Double.parseDouble(elevationStr);
+        //int time, double latitude, double longitude, double elevation
+        
+		
+		GPSPoint gpspoint = new GPSPoint((GPSDataConverter.toSeconds(timeStr)), latitude, longitude, elevation);
+		return gpspoint;
+		
+
+		
+		
+		
 
 		// TODO - START ;
 		
-		throw new UnsupportedOperationException(TODO.method());
+		//throw new UnsupportedOperationException(TODO.method());
 
 		// OPPGAVE - SLUTT ;
 	    
