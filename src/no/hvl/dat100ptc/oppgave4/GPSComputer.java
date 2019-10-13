@@ -1,5 +1,7 @@
 package no.hvl.dat100ptc.oppgave4;
 
+import java.util.Arrays;
+
 import no.hvl.dat100ptc.TODO;
 import no.hvl.dat100ptc.oppgave1.GPSPoint;
 import no.hvl.dat100ptc.oppgave2.GPSData;
@@ -75,22 +77,47 @@ public class GPSComputer {
 
 		// TODO - SLUTT
 
-	}
+	
 
 	// beregn total tiden for hele turen (i sekunder)
 	public int totalTime() {
+		int returnvalue;
+		double mellomlagring=0;
+		
+		for(int i = 0; i<gpspoints.length-1;i++) {
+			if(gpspoints[i+1].getTime()-gpspoints[i].getTime() >= 0) {
+				mellomlagring = mellomlagring +
+						gpspoints[i+1].getTime()-gpspoints[i].getTime();
+				
+			} 
+
+			
+			
+			
+		} returnvalue = (int)mellomlagring;
+		return returnvalue;
+
+		} 
+		
+		
 		
 		
 
 		//throw new UnsupportedOperationException(TODO.method());
 
-	}
+	
 		
 	// beregn gjennomsnitshastighets mellom hver av gps punktene
 
 	public double[] speeds() {
 		
 		// TODO - START		// OPPGAVE - START
+		
+		double [] speeds = new double [gpspoints.length -1];
+		for (int i=0; i< gpspoints.length -1; i++) {
+			speeds [i]=GPSUtils.speed(gpspoints[i], gpspoints[i+1]);
+			
+		} return speeds;
 		
 		//throw new UnsupportedOperationException(TODO.method());
 
@@ -100,23 +127,53 @@ public class GPSComputer {
 	
 	public double maxSpeed() {
 		
-		double maxspeed = 0;
+		
+		double mellomlagring=0;
+		double [] maxSpeed = new double [gpspoints.length-1];
+		for (int i=0; i< gpspoints.length-1; i++) {
+			maxSpeed [i]=GPSUtils.speed(gpspoints[i], gpspoints[i+1]);
+			Arrays.sort(maxSpeed);
+			mellomlagring = maxSpeed [maxSpeed.length-1];
+			
+			
+			
+		} return mellomlagring;
+		
+		
+		
+		
+
+			
+		}
+		
+		
 		
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+		//throw new UnsupportedOperationException(TODO.method());
 		
 		// TODO - SLUTT
 		
-	}
+	
 
 	public double averageSpeed() {
 
-		double average = 0;
+		//double average = 0;
+		double total = 0;
+		double average= 0;
+		double [] maxSpeed = new double [gpspoints.length-1];
+		for (int i=0; i< gpspoints.length-1; i++) {
+			maxSpeed [i]=GPSUtils.speed(gpspoints[i], gpspoints[i+1]);
+			total = (double)total + maxSpeed[i];
+			average = (double)total / maxSpeed.length; 
+			
+		
+			
+			} return average;
 		
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+		//throw new UnsupportedOperationException(TODO.method());
 		
 		// TODO - SLUTT
 		
