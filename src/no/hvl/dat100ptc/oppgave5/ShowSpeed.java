@@ -42,14 +42,21 @@ public class ShowSpeed extends EasyGraphics {
 	}
 	
 	public void showSpeedProfile(int ybase, int N) {
-		
+		int margin = MARGIN;
+		int averagespeed = 0;
 		System.out.println("Angi tidsskalering i tegnevinduet ...");
 		int timescaling = Integer.parseInt(getText("Tidsskalering"));
-				
-		// TODO - START
+        GPSComputer speed = new GPSComputer(gpspoints);
+		averagespeed = (int)speed.averageSpeed();
+		for(int i = 0; i < gpspoints.length-1; i++) {
+		drawLine(margin,ybase-averagespeed,margin+N,ybase-averagespeed);}
 		
-		throw new UnsupportedOperationException(TODO.method());
 	
-		// TODO - SLUTT
-	}
+
+		
+		
+		
+		
+		}
+		
 }
