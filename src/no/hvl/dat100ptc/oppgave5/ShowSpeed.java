@@ -43,13 +43,30 @@ public class ShowSpeed extends EasyGraphics {
 	
 	public void showSpeedProfile(int ybase, int N) {
 		int margin = MARGIN;
+		int margin1 = MARGIN;
 		int averagespeed = 0;
-		System.out.println("Angi tidsskalering i tegnevinduet ...");
-		int timescaling = Integer.parseInt(getText("Tidsskalering"));
-        GPSComputer speed = new GPSComputer(gpspoints);
-		averagespeed = (int)speed.averageSpeed();
-		for(int i = 0; i < gpspoints.length-1; i++) {
-		drawLine(margin,ybase-averagespeed,margin+N,ybase-averagespeed);}
+		int speeds = 0;
+		GPSComputer speed = new GPSComputer(gpspoints);
+		for (int i = 0; i < gpspoints.length-1; i++) {
+			speeds = (int)GPSUtils.speed(gpspoints[i], gpspoints[i+1]);
+			setColor(0,0,255);
+			setSpeed(1);
+			drawLine(margin,ybase,margin,ybase-speeds);
+			margin += 2;
+			
+			// denne delen av koden gjør det samme som showprofile
+			
+		} for ( int i = 0; i < gpspoints.length-1; i++) {
+			setColor(0,255,0);
+			averagespeed = (int)speed.averageSpeed();
+			drawLine(margin1, ybase-averagespeed, margin1, ybase-averagespeed);
+			margin1 +=2;
+		} 
+		//System.out.println("Angi tidsskalering i tegnevinduet ...");
+		//int timescaling = Integer.parseInt(getText("Tidsskalering"));
+       
+		
+
 		
 	
 
