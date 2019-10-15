@@ -157,25 +157,13 @@ public class GPSComputer {
 	
 
 	public double averageSpeed() {
+		
+        double average;
+        double totaltid = totalTime();
+        double totallengde = totalDistance();
+        average = (totallengde / totaltid * 3600) / 1000;
+        return average;
 
-		//double average = 0;
-		double total = 0;
-		double average= 0;
-		double [] maxSpeed = new double [gpspoints.length-1];
-		for (int i=0; i< gpspoints.length-1; i++) {
-			maxSpeed [i]=GPSUtils.speed(gpspoints[i], gpspoints[i+1]);
-			total = (double)total + maxSpeed[i];
-			average = (double)total / maxSpeed.length; 
-			
-		
-			
-			} return average;
-		
-		// TODO - START
-		
-		//throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO - SLUTT
 		
 	}
 
@@ -193,16 +181,45 @@ public class GPSComputer {
 
 	// beregn kcal gitt weight og tid der kjøres med en gitt hastighet
 	public double kcal(double weight, int secs, double speed) {
-
+		
+		
 		double kcal;
 
 		// MET: Metabolic equivalent of task angir (kcal x kg-1 x h-1)
 		double met = 0;		
 		double speedmph = speed * MS;
+		
+		if(speedmph<10) {
+			met = 4.0;
+			kcal = met * weight * (secs / 3600d); 
+			
+		}
+		if(speedmph == 10 && speed <=12 ) {
+			met = 6.0;
+			kcal = met * weight * (secs  / 3600d);
+		}
+		if(speedmph == 12 && speed <= 14) {
+			met = 8.0;
+			kcal = met * weight * (secs / 3600d);
+			
+		}
+		if(speedmph == 14 && speed <=16) {
+			met = 10.0;
+			kcal = met * weight * (secs / 3600d);
+			
+		}
+		if(speedmph == 16 && speed <=20) {
+			met = 12.0;
+			kcal = met * weight * (secs / 3600d);
+			
+		} else {
+			met = 16.0;
+			kcal = met * weight * (secs / 3600d);
+		} return kcal;
 
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.method());
+		//throw new UnsupportedOperationException(TODO.method());
 
 		// TODO - SLUTT
 		
@@ -211,24 +228,30 @@ public class GPSComputer {
 	public double totalKcal(double weight) {
 
 		double totalkcal = 0;
-
-		// TODO - START
+			totalkcal = kcal(weight,totalTime(),averageSpeed());
 		
-		throw new UnsupportedOperationException(TODO.method());
+		 return totalkcal;
 
-		// TODO - SLUTT
-		
-	}
+
+}
 	
 	private static double WEIGHT = 80.0;
 	
 	public void displayStatistics() {
 
 		System.out.println("==============================================");
+		System.out.println("Total Time     : " + totalTime());
+		System.out.println("Total distance : " + totalDistance());
+		System.out.println("Total elevation: " + totalElevation());
+		System.out.println("Max speed      : " + maxSpeed());
+		System.out.println("Average Speed  : " + averageSpeed());
+		System.out.println("Energy         : " + totalKcal(WEIGHT));
+		System.out.println("==============================================");
+		
 
 		// TODO - START
 
-		throw new UnsupportedOperationException(TODO.method());
+		//throw new UnsupportedOperationException(TODO.method());
 		
 		// TODO - SLUTT
 		
